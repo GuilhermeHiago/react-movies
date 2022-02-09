@@ -1,5 +1,5 @@
 # React Movies
-Projeto de app base React com integração de API The Movie Database API.
+Projeto front-end React com integração de API The Movie Database API.
 
 ## 🚀 Começando
 Basta clonar o repositório e instalar os softwares listados em pré-requisitos
