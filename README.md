@@ -9,13 +9,13 @@ Basta clonar o repositório e instalar os softwares listados em pré-requisitos
 
 
 ### 🔧 Build
-Para construir o projeto é nescessario rodar:
+Para construir o projeto é nescessario rodar o seguinte comando no diretório do projeto:
 ```
 npm instal
 ```
 
 ### ⚙️ Run
-Para rodar o projeto é nescessario rodar:
+Para rodar o projeto é nescessario rodar o seguinte comando no diretório do projeto:
 ```
 npm start
 ```
