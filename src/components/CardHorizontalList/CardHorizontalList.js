@@ -1,5 +1,5 @@
 import { ListGroup, ListGroupItem } from "react-bootstrap";
-import MovieCard from "./MovieCard";
+import MovieCard from "../MovieCard/MovieCard";
 
 const CardHorizontalList = (props) => {
     return(

@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
 import { Container, Row, Col, Image } from 'react-bootstrap';
-import CircleProgressBar from './CicleProgressBar'
-import CardHorizontalList from './CardHorizontalList'
+import CircleProgressBar from '../CircleProgressBar/CicleProgressBar'
+import CardHorizontalList from '../CardHorizontalList/CardHorizontalList'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import api from '../services/api';
+import api from '../../services/api';
 
 const MovieView = (props) => {
     var api_key = '129f4b088f4bc0060eab14b4f45b9659'

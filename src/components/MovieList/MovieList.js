@@ -1,6 +1,6 @@
 import { Container, Row, Col } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import MovieCard from './MovieCard';
+import MovieCard from '../MovieCard/MovieCard';
 
 const MovieList = (props) => {
 

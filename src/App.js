@@ -3,9 +3,10 @@ import './App.css';
 import { Button, Nav } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import api from './services/api';
-import MovieList from './components/MovieList';
-import MovieView from './components/MovieView';
-import PaginationSystem from './components/PaginationSystem'
+import MovieList from './components/MovieList/MovieList';
+import MovieView from './components/MovieView/MovieView';
+import FilterList from './components/FilterList/FilterList';
+import PaginationSystem from './components/PaginationSystem/PaginationSystem'
 
 // url = https://api.themoviedb.org/3/discover/movie?api_key=<<api_key>>&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_watch_monetization_types=flatrate
 
@@ -18,25 +19,26 @@ function App() {
   const [movie, setMovie] = useState([])
   const [currentMovieId, setCurrentMovieId] = useState([])
   const [isMovieView, setIsMovieView] = useState([false])
+  const [filters, setFilters] = useState({})
+  const [actualFilters, setActualFilters] = useState([])
 
   function handlePagination(pageKey){
-
     if(pageKey <= lastPage && pageKey <= numPages){
       setCurrentPage(pageKey)
     }
   }
 
-  function makeGenresString(genreList){
-    var str = ""
-
-    genreList.map(value => str += `with_genres=${value}&`)
+  function makeGenresString(){
+    var str = ''
+    
+    actualFilters.map(genre => str += `with_genres=${filters[genre]}&`)
 
     return str
   }
 
   async function getPopularMovies(){
     // let url = `discover/movie?api_key=${api_key}&language=pt-BR&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_watch_monetization_types=flatrate`
-    let url = `movie/popular?api_key=${api_key}&with_genres=16&with_genres=35&with_genres=37&with_genres=10751&language=pt-BR&page=${currentPage}`
+    let url = `movie/popular?api_key=${api_key}&${makeGenresString(actualFilters)}&language=pt-BR&page=${currentPage}`
 
     let resposta = await api.get(url)
 
@@ -56,6 +58,17 @@ function App() {
     return resposta
   }
 
+  async function getGenreList(){
+    let url = `genre/movie/list?api_key=${api_key}&language=pt-BR`
+    let resposta = await api.get(url)
+
+    resposta = resposta.data.genres
+    let dict = {}
+
+    resposta.map(genero => dict[genero.name] = genero.id)
+    setFilters(dict)
+  }
+
   function handleIconClick(){
     if(isMovieView){
       setIsMovieView(false)
@@ -65,8 +78,15 @@ function App() {
   function handleCardClick(id){
     setMovie(movies.find(movie => movie.id === id))
     setIsMovieView(true)
+  }
 
-    // console.log("test: ", id, movies.find(movie => movie.id === id))
+  function handleFilterClick(filterName, pressed){
+    if(pressed){
+      setActualFilters(actualFilters.concat([filterName]))
+    }
+    else{
+      setActualFilters(actualFilters.filter(value => value !== filterName))
+    }
   }
 
   // Call getPopularMovies every time that current page changes
@@ -75,7 +95,11 @@ function App() {
     getPopularMovies()
     getMovie()
 
-  },[currentPage]);
+  },[currentPage, actualFilters]);
+
+  useEffect(() => {
+    getGenreList()
+  }, [])
 
   return (
     <div className="App">
@@ -93,7 +117,9 @@ function App() {
         {
           isMovieView === true ? (
             <MovieView movieData={movie}></MovieView>
-          ) : ('')
+          ) : (
+            <FilterList items={Object.keys(filters)} onFilterClick={handleFilterClick}></FilterList>
+          )
         }
 
       </header>
