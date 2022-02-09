@@ -1,0 +1,99 @@
+:root {
+    --theme-color: #14FF00;
+    --first-half-percentage: 50;
+    --second-half-percentage: 50;
+    --first-half: calc(360deg * calc(calc(var(--first-half-percentage)) / 100));
+    --second-half: calc(180deg * calc(calc(var(--second-half-percentage)) / 100));
+}
+
+.progress {
+    width: 60px;
+    height: 60px !important;
+    float: left;
+    line-height: 53px;
+    background: none;
+    box-shadow: none;
+    position: relative
+}
+
+.progress:after {
+    content: "";
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 6px solid rgba(255, 255, 255, 0.1);
+    position: absolute;
+    top: 0;
+    left: 0
+}
+
+.progress>span {
+    width: 50%;
+    height: 100%;
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    z-index: 1
+}
+
+.progress .progress-left {
+    left: 0
+}
+
+.progress .progress-bar {
+    width: 100%;
+    height: 100%;
+    background: none;
+    border-width: 6px;
+    border-style: solid;
+    position: absolute;
+    top: 0
+}
+
+.progress .progress-left .progress-bar {
+    left: 100%;
+    border-top-right-radius: 80px;
+    border-bottom-right-radius: 80px;
+    border-left: 0;
+    -webkit-transform-origin: center left;
+    transform-origin: center left
+}
+
+.progress .progress-right {
+    right: 0
+}
+
+.progress .progress-right .progress-bar {
+    left: -100%;
+    border-top-left-radius: 80px;
+    border-bottom-left-radius: 80px;
+    border-right: 0;
+    -webkit-transform-origin: center right;
+    transform-origin: center right;
+    -webkit-transform: rotate(var(--first-half));
+    transform: rotate(var(--first-half));
+}
+
+.progress .progress-value {
+    width: 90%;
+    height: 90%;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    font-size: 16px;
+    color: var(--theme-color);
+    vertical-align: middle;
+    text-align: center;
+    position: absolute;
+    top: 5%;
+    left: 5%;
+}
+
+.progress.blue .progress-bar {
+    border-color: var(--theme-color)
+}
+
+.progress.blue .progress-left .progress-bar {
+    /* animation: loading-2 calc(1.5s) linear forwards 1.8s */
+    -webkit-transform: rotate(var(--second-half));
+    transform: rotate(var(--second-half))
+}
