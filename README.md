@@ -1,5 +1,7 @@
 # React Movies
 Projeto front-end React com integração de API The Movie Database API.
+### Observaçao
+Quando estiver na tela do filme você deve clicar no icone "TMDB" no navbar para poder voltar a tela de pesquisa.
 
 ## 🚀 Começando
 Basta clonar o repositório e instalar os softwares listados em pré-requisitos
