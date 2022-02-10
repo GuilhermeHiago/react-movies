@@ -80,29 +80,30 @@ const MovieView = (props) => {
     },[]);
 
     return(
-        <Container>
-            {
-                props.movieData ? (
-                    <Row>
-                        <Col>
-                            <Image className="p-4" src={`https://image.tmdb.org/t/p/w500${props.movieData.poster_path}`}></Image>
-                        </Col>
-                        
-                        <Col>
-                            <h1>{title + ' (' + release_date.substring(release_date.lastIndexOf('/')+1, release_date.length) + ')'}</h1>
-                            <p>{ageRating + "anos * " + release_date + " * " + getGenres() + " * " + getDuration()}</p>
-                            <Container className="d-flex align-items-center p-0">
-                                <CircleProgressBar value={props.movieData.vote_average * 10}></CircleProgressBar>
-                                <span className="text-wrap justify-content-center ">Avaliação dos <br/>usuarios</span>
-                            </Container>
-                            <h3>Sinopse</h3>
-                            <p>{sinopse}</p> 
-                            <h3>Elenco Original</h3>
-                            {/* <CardHorizontalList items={cast}></CardHorizontalList> */}
-                        </Col>
-                    </Row>
-                ) : ''
-            }
+        <Container className='w-100 m-0 p-0 d-flex'>
+            <Container className="text-light w-100 m-0 p-0 d-flex" style={{ backgroundColor: '#2D0C5E' }}>
+                {
+                    props.movieData ? (
+                        <Row className='w-100 m-0 p-0'>
+                            <Col className='p-0 m-0 col-xs-4 col-sm-18 col-md-4 col-lg-4 d-flex justify-content-center'>
+                                <Image className="p-4" style={{ width: '383px' }} src={`https://image.tmdb.org/t/p/w500${props.movieData.poster_path}`}></Image>
+                            </Col>
+                            
+                            <Col className='mt-3 col-xs-4 col-sm-18 col-md-2 col-lg-8'>
+                                <h1>{title + ' (' + release_date.substring(release_date.lastIndexOf('/')+1, release_date.length) + ')'}</h1>
+                                <p>{ageRating + "anos * " + release_date + " * " + getGenres() + " * " + getDuration()}</p>
+                                <Container className="d-flex align-items-center p-0 mb-4">
+                                    <CircleProgressBar value={props.movieData.vote_average * 10}></CircleProgressBar>
+                                    <span className="text-wrap justify-content-center">Avaliação dos <br/>usuarios</span>
+                                </Container>
+                                <h3>Sinopse</h3>
+                                <span className='w-100' style={{'font-size': '16px'}}>{sinopse}</span> 
+                                {/* <CardHorizontalList items={cast}></CardHorizontalList> */}
+                            </Col>
+                        </Row>
+                    ) : ''
+                }
+            </Container>
         </Container>
     )
 }
